@@ -28,7 +28,7 @@ public class RewardsConfigTests {
 	// Provide a mock for testing
 	private DataSource dataSource = Mockito.mock(DataSource.class);
 
-	private RewardsConfig rewardsConfig = new RewardsConfig(dataSource);
+	private RewardsConfig rewardsConfig = new RewardsConfig(dataSource,8);
 
 	@Test
 	public void getBeans() {

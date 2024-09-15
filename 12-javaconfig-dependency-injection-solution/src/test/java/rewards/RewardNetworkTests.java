@@ -27,11 +27,13 @@ public class RewardNetworkTests {
 	 * The object being tested.
 	 */
 	private RewardNetwork rewardNetwork;
-
+    private String a23 = null;
 	@BeforeEach
 	public void setUp() throws SQLException {
 		// Create the test configuration for the application:
-		
+
+		System.setProperty("spring.profiles.active","uatx,uat");
+		System.setProperty("parto.ghost","aloha!");
 		ApplicationContext context = SpringApplication.run(TestInfrastructureConfig.class);
 		
 		// Get the bean to use to invoke the application
@@ -41,7 +43,10 @@ public class RewardNetworkTests {
 		RestaurantRepository restaurantRepo = context.getBean(RestaurantRepository.class);
 		RewardRepository bean = context.getBean(RewardRepository.class);
 		String bean1 = context.getBean(String.class);
+		Integer int2 = context.getBean(Integer.class);
+		System.out.println("printing int" + int2);
 		System.out.println("printing........" + rewardNetwork+" " + d + " " + accountRepository + " " + restaurantRepo + " " + bean + " " + bean1) ;
+		a23 = context.getBean(String.class);
 		//DataSource bean = context.getBean(DataSource.class);
 		//System.out.println(bean.getConnection());
 	}
@@ -71,6 +76,8 @@ public class RewardNetworkTests {
 
 		// the total contribution amount should have been split into 2 distributions
 		assertEquals(2, contribution.getDistributions().size());
+
+		assertEquals(a23,"non-actor56");
 
 		// each distribution should be 4.00 (as both have a 50% allocation)
 		assertEquals(MonetaryAmount.valueOf("6.00"), contribution.getDistribution("Brian").getAmount());
