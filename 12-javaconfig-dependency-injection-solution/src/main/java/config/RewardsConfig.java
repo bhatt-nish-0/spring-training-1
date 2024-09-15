@@ -2,6 +2,7 @@ package config;
 
 import javax.sql.DataSource;
 
+import SomeBean.SomeBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,7 @@ import rewards.internal.restaurant.JdbcRestaurantRepository;
 import rewards.internal.restaurant.RestaurantRepository;
 import rewards.internal.reward.JdbcRewardRepository;
 import rewards.internal.reward.RewardRepository;
+import someBeanAgain.SomeBeanAgain;
 
 @Configuration
 //@Profile("popo")
@@ -45,6 +47,9 @@ public class RewardsConfig {
 	@Value("${harbo: spiel}")
 	private String harbo;
 
+	@Value("#{new someBeanAgain.SomeBeanAgain('oyehoye!')}")
+	private SomeBeanAgain someBeanAgain;
+
 
 	private Integer profileVal;
 
@@ -64,6 +69,8 @@ public class RewardsConfig {
 		System.out.println(newInt * 8); //implicit conversion to int from string
 		System.out.println(newStr); //implicit conversion to int from string
 		System.out.println(harbo);
+		System.out.println("printing!");
+		System.out.println(someBeanAgain.getAbc());
 		String property = environment.getProperty("harman.baweja");
 		return property;
 	}
